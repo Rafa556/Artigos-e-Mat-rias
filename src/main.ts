@@ -1,80 +1,6 @@
-class Article {
-  title: string;
-  subtitle: string;
-  publishedAt: Date;
-  author: string;
-  image: string;
-  content: string;
-
-  constructor(
-    title: string,
-    subtitle: string,
-    publishedAt: Date,
-    author: string,
-    image: string,
-    content: string
-  ) {
-    this.title = title;
-    this.subtitle = subtitle;
-    this.publishedAt = publishedAt;
-    this.author = author;
-    this.image = image;
-    this.content = content;
-  }
-}
-
-class CreateArticle {
-  articleRepository: ArticleRepository;
-  constructor(articleRepository: ArticleRepository) {
-    this.articleRepository = articleRepository;
-  }
-
-  execute(
-    title: string,
-    subtitle: string,
-    publishedAt: Date,
-    author: string,
-    image: string,
-    content: string
-  ): void {
-    const article: Article = new Article(
-      title,
-      subtitle,
-      publishedAt,
-      author,
-      image,
-      content
-    );
-    this.articleRepository.addArticle(article);
-  }
-}
-
-class RemoveArticles {
-  articleRepository: ArticleRepository;
-  constructor(articleRepository: ArticleRepository) {
-    this.articleRepository = articleRepository;
-  }
-  execute(title: string) {
-    this.articleRepository.removeArticles(title);
-  }
-}
-
-class ArticleRepository {
-  private articleList: Article[] = [];
-
-  addArticle(article: Article): void {
-    this.articleList.push(article);
-  }
-
-  getArticles(): Article[] {
-    return this.articleList;
-  }
-  removeArticles(title: string): void {
-    this.articleList = this.articleList.filter(
-      (article) => article.title !== title
-    );
-  }
-}
+import { ArticleRepository } from "./article-repository";
+import { CreateArticle } from "./create-article";
+import { RemoveArticles } from "./remove-articles";
 
 const articleRepository: ArticleRepository = new ArticleRepository();
 const createArticle: CreateArticle = new CreateArticle(articleRepository);
@@ -135,7 +61,9 @@ createArticle.execute(
 const articles = articleRepository.getArticles();
 const removeArticles: RemoveArticles = new RemoveArticles(articleRepository);
 
-removeArticles.execute("Luan Santana posa com moto e anuncia novo clipe");
+removeArticles.execute(
+  "Murilo Huff é conhecido pelas canções apaixonadas e dedicação a família."
+);
 
 console.log(articleRepository.getArticles());
 
