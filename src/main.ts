@@ -5,7 +5,9 @@ import { RemoveArticles } from "./remove-articles";
 const articleRepository: ArticleRepository = new ArticleRepository();
 const createArticle: CreateArticle = new CreateArticle(articleRepository);
 
+//Aqui está implementando os valores dos objetos
 createArticle.execute(
+  "A1",
   "Murilo Huff é conhecido pelas canções apaixonadas e dedicação a família.",
   "Fonte: ViolaShow.",
   new Date("2024-12-18"),
@@ -14,6 +16,7 @@ createArticle.execute(
   "Nesta segunda-feira, 16, um lançamento chega para completar o seu repertório, desta vez com uma motivação diferente: uma homenagem ao filho Leo no dia do seu aniversário de cinco anos. “Quanto custa?” está disponível em todas as plataformas de áudio e no Youtube. A música foi gravada pelo papai de Leo no projeto “Fortaleza” em 2024, que ganhou grande notoriedade com a faixa “Anestesiado”. “Gravei “Quanto custa?” e estava esperando um momento especial para fazer esse lançamento, chegou a hora! Hoje o Leozinho completa cinco anos, separei vários vídeos lindos para ilustrar o clipe. Vale a pena ouvir essa música, passa uma mensagem muito bacana de amor”, revela Murilo Huff."
 );
 createArticle.execute(
+  "A2",
   "Morre a cantora Marília Mendonça em acidente aéreo",
   "Além da cantora, mais quatro pessoas perderam a vida no acidente que aconteceu em Minas Gerais",
   new Date("2021-11-05"),
@@ -23,6 +26,7 @@ createArticle.execute(
 );
 
 createArticle.execute(
+  "A3",
   "Zezé di Camargo é flagrado trabalhando no campo pela noiva",
   "Cantor resolveu relembrar um pouco de suas raízes na fazenda",
   new Date("2021-07-22"),
@@ -32,6 +36,7 @@ createArticle.execute(
 );
 
 createArticle.execute(
+  "A4",
   "Marília Mendonça muda visual para aniversário e recebe elogio de Murilo Huff: “Gata”",
   "A Rainha da Sofrência completa 26 anos hoje!",
   new Date("2021-07-22"),
@@ -41,6 +46,7 @@ createArticle.execute(
 );
 
 createArticle.execute(
+  "A5",
   "Luan Santana posa com moto e anuncia novo clipe",
   "Cantor compartilhou sequência de cliques que enlouqueceu as fãs",
   new Date("2021-07-21"),
@@ -50,6 +56,7 @@ createArticle.execute(
 );
 
 createArticle.execute(
+  "A6",
   "Maraisa revela que usa soro para controlar a ansiedade: “Semana pesada”",
   "Cantora sofre com o transtorno e recorre ao tratamento para controlar as crises",
   new Date("2021-07-21"),
@@ -60,10 +67,20 @@ createArticle.execute(
 
 const articles = articleRepository.getArticles();
 const removeArticles: RemoveArticles = new RemoveArticles(articleRepository);
+const update: ArticleRepository = new ArticleRepository();
 
 removeArticles.execute(
   "Murilo Huff é conhecido pelas canções apaixonadas e dedicação a família."
 );
+articleRepository.update("A6", {
+  id: "A5", // geralmente você passa o mesmo id, para manter a referência
+  title: "Novo título do artigo",
+  subtitle: "Novo subtítulo",
+  publishedAt: new Date("2024-01-01"),
+  author: "Novo autor",
+  image: "https://novo.link/para/imagem.jpg",
+  content: "Novo conteúdo atualizado do artigo",
+});
 
 console.log(articleRepository.getArticles());
 

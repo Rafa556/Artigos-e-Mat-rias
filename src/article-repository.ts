@@ -3,6 +3,8 @@ import { IArticleRepository } from "./i-article-repository";
 
 //classe para guardar os arquivos criados no repositório
 export class ArticleRepository implements IArticleRepository {
+  readonly id: string;
+  //implementa o contrato de interface e segue o formato definido
   private articleList: Article[] = []; // lista dos artigos armazenados
 
   //métodos para adicionar o artigo na lista
@@ -21,5 +23,19 @@ export class ArticleRepository implements IArticleRepository {
     this.articleList = this.articleList.filter(
       (article) => article.title !== title
     );
+  }
+
+  update(id: string, updatedArticle: Article): void {
+    const article = this.articleList.find((article) => article.id === id);
+
+    if (article) {
+      article.title = updatedArticle.title;
+      article.subtitle = updatedArticle.subtitle;
+      article.publishedAt = updatedArticle.publishedAt;
+      article.author = updatedArticle.author;
+      article.image = updatedArticle.image;
+      article.content = updatedArticle.content;
+      return;
+    }
   }
 }

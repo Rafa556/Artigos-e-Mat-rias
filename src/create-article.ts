@@ -10,6 +10,7 @@ export class CreateArticle {
 
   //método para executar a criação de arquivos e adicionar ao repositório
   execute(
+    id: string,
     title: string,
     subtitle: string,
     publishedAt: Date,
@@ -19,6 +20,7 @@ export class CreateArticle {
   ): void {
     //cria uma instancia da classe Article com os dados fornecidos
     const article: Article = new Article(
+      id,
       title,
       subtitle,
       publishedAt,
